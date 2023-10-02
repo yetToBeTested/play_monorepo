@@ -1,0 +1,17 @@
+{
+  "name": "paly-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:cpn": "pnpm -r --filter @motorepo/component run start",
+    "build:cpn": "pnpm -r --filter @motorepo/component run build",
+    "dev:lwc": "pnpm -r --filter @motorepo/low_code run start",
+    "build:lwc": "pnpm -r --filter @motorepo/low_code run build",
+    "dev:treact": "pnpm -r --filter @motorepo/test_react run dev",
+    "build:treat": "pnpm -r --filter @motorepo/test_react run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

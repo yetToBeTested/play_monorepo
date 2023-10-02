@@ -1,0 +1,70 @@
+.wrap-form {
+  padding: 0 !important;
+  padding-left: 11px !important;
+  border: 1px solid #c1c7cd;
+  border-radius: 4px;
+
+  :global {
+    .ant-form-item-label {
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+
+    .ant-form-item-label > label {
+      height: auto;
+      color: #919399;
+      font-weight: 400;
+    }
+
+    .ant-picker {
+      width: 100%;
+    }
+
+    .ant-input,
+    .ant-select-selector,
+    .ant-picker,
+    .ant-input-number {
+      border: none;
+      border-color: transparent !important;
+    }
+    .ant-input-affix-wrapper {
+      background: none;
+      border: none;
+    }
+  }
+}
+.wrap-form-select {
+  position: relative;
+  padding: 0px !important;
+
+  :global {
+    .ant-form-item-label {
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      z-index: 1;
+      text-align: left;
+      transform: translateY(-50%);
+    }
+
+    .ant-select-selector {
+      padding-left: var(--label-length) !important;
+    }
+
+    .ant-select-selection-search {
+      left: var(--label-length) !important;
+    }
+
+    .ant-select-multiple .ant-select-selection-search {
+      top: -2px;
+      left: 0 !important;
+      margin-left: 0 !important;
+    }
+
+    .ant-select-multiple .ant-select-selection-placeholder {
+      left: var(--label-length) !important;
+      height: 28px;
+      line-height: 28px;
+    }
+  }
+}
