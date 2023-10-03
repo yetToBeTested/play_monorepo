@@ -6,10 +6,11 @@
   "scripts": {
     "dev:cpn": "pnpm -r --filter @motorepo/component run start",
     "build:cpn": "pnpm -r --filter @motorepo/component run build",
-    "dev:lwc": "pnpm -r --filter @motorepo/low_code run start",
+    "dev:lwc": "pnpm -r --filter @motorepo/low_code run dev",
     "build:lwc": "pnpm -r --filter @motorepo/low_code run build",
     "dev:treact": "pnpm -r --filter @motorepo/test_react run dev",
-    "build:treat": "pnpm -r --filter @motorepo/test_react run build"
+    "build:treat": "pnpm -r --filter @motorepo/test_react run build",
+    "dev:tempalte": "pnpm -r --filter @motorepo/tempalte run dev"
   },
   "keywords": [],
   "author": "",

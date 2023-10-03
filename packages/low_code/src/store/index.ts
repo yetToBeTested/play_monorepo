@@ -7,10 +7,12 @@ import {
 } from 'react-redux'
 
 import counterReducer from './demo/counterSlice'
+import editSlice from './src/edit'
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer
+    counter: counterReducer,
+    edit: editSlice
   }
 })
 

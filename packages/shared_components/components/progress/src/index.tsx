@@ -6,13 +6,13 @@ import type { FormItemProps } from 'antd'
 import styles from './index.module.less'
 
 interface IProps extends FormItemProps {
-  r: number
-  style: any
+  r?: number
+  style?: any
   fill?: string
   stroke?: string
   strokeWidth?: string
   strokeDasharray?: number
-  strokeDashoffset: number
+  strokeDashoffset?: number
   children?: ReactNode
 }
 
