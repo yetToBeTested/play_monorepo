@@ -51,10 +51,10 @@ const WrapFormComponentRef: FC<IProps> = (
   )
 }
 
-const WrapFormComponent = React.forwardRef(
+const SharedWrapFormComponent = React.forwardRef(
   WrapFormComponentRef as unknown as (
     props: any & { ref?: any }
   ) => React.ReactElement
 )
 
-export default WrapFormComponent
+export default SharedWrapFormComponent

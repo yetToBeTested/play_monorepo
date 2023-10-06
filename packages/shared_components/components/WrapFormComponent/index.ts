@@ -1,3 +1,3 @@
-import WrapFormComponent from './src'
+import SharedWrapFormComponent from './src'
 
-export default WrapFormComponent
+export default SharedWrapFormComponent

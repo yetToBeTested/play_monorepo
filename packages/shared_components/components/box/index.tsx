@@ -1,6 +1,10 @@
 import React from 'react'
 import styles from './index.module.less'
-function Box() {
-  return <div className={styles['box']}></div>
+function SharedBox() {
+  return (
+    <>
+      <div className={styles['box']}></div>
+    </>
+  )
 }
-export default Box
+export default SharedBox

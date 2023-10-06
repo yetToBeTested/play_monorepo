@@ -1,0 +1,28 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  .top {
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .content {
+    display: flex;
+    .left,
+    .right {
+      flex-basis: 200px;
+    }
+    .left {
+      .title {
+        font-size: 32px;
+      }
+      .row {
+        padding: 10px 20px;
+      }
+    }
+    .center {
+      background-color: #f0f0f0;
+      flex: 1;
+    }
+  }
+}

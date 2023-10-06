@@ -1,7 +1,12 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
-import { ContainerTable, Box, ProgressComponent } from '@motorepo/component'
+import {
+  SharedContainerTable,
+  SharedBox,
+  SharedProgressComponent,
+  SharedForm
+} from '@motorepo/component'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { update } from '@/store/src/edit'
 
@@ -27,6 +32,7 @@ function Container() {
   const [, drop] = useDrop(() => {
     return {
       accept: 'box',
+
       drop(item1: any) {
         setItem((item) => [...item, item1])
         dispatch(update({ ...item1.props }))
@@ -49,16 +55,18 @@ function Container() {
       {item.map((child, index) => {
         if (child.component == 'table') {
           return (
-            <ContainerTable
+            <SharedContainerTable
               key={`${child.component}-${index}`}
               dataSource={child.props.dataSource}
               columns={child.props.columns}
             />
           )
         } else if (child.component == 'box') {
-          return <Box key={`${child.component}-${index}`} />
+          return <SharedBox key={`${child.component}-${index}`} />
         } else if (child.component == 'progress') {
-          return <ProgressComponent key={`${child.component}-${index}`} />
+          return <SharedProgressComponent key={`${child.component}-${index}`} />
+        } else if (child.component == 'form') {
+          return <SharedForm key={`${child.component}-${index}`} data={[]} />
         }
       })}
     </div>

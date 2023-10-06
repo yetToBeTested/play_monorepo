@@ -68,10 +68,10 @@ const ProgressComponentRef: FC<IProps> = (
   )
 }
 
-const ProgressComponent = React.forwardRef(
+const SharedProgressComponent = React.forwardRef(
   ProgressComponentRef as unknown as (
     props: IProps & { ref?: any }
   ) => React.ReactElement
 )
 
-export default ProgressComponent
+export default SharedProgressComponent

@@ -1,12 +1,14 @@
-import WrapFormComponent from './WrapFormComponent'
-import ProgressComponent from './progress'
-import ContainerTable, { ContainerTableStr } from './table'
-import Box from './box'
+import SharedWrapFormComponent from './WrapFormComponent'
+import SharedProgressComponent from './progress'
+import { SharedContainerTable, SharedContainerTableStr } from './table'
+import SharedForm from './form'
+import SharedBox from './box'
 
 export {
-  WrapFormComponent,
-  ProgressComponent,
-  ContainerTable,
-  ContainerTableStr,
-  Box
+  SharedWrapFormComponent,
+  SharedProgressComponent,
+  SharedContainerTable,
+  SharedContainerTableStr,
+  SharedForm,
+  SharedBox
 }

@@ -1,3 +1,3 @@
-import ProgressComponent from './src'
+import SharedProgressComponent from './src'
 
-export default ProgressComponent
+export default SharedProgressComponent

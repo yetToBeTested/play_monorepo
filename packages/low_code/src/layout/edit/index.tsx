@@ -14,7 +14,7 @@ import { isCodemirrorJSON } from '@/utils'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { update } from '@/store/src/edit'
 
-import { ContainerTableStr } from '@motorepo/component'
+import { SharedContainerTableStr } from '@motorepo/component'
 function LowCodeEdit() {
   const ref = useRef<any>(null)
 
@@ -59,7 +59,7 @@ function LowCodeEdit() {
   }
 
   const exportFile = async () => {
-    downloadFile(ContainerTableStr, 'MyComponent.tsx', 'text/typescript')
+    downloadFile(SharedContainerTableStr, 'MyComponent.tsx', 'text/typescript')
     downloadFile(data, 'MyData.json')
   }
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDrag } from 'react-dnd'
 // import styles from './index.module.less'
-function Box() {
+function LowCodeBox() {
   const ref = useRef(null)
 
   const [, drag] = useDrag({
@@ -19,4 +19,4 @@ function Box() {
 
   return <div ref={ref}>box</div>
 }
-export default Box
+export default LowCodeBox
