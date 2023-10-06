@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Input, Select, Space, Table, Tag } from 'antd'
+import { Button, Form, Input, Select, Space, Table, Tag } from 'antd'
 
 interface Item {
   key?: string
@@ -50,7 +50,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
       if (type === 'select') {
         return <Input placeholder="请输入：data1,data2,data3..." />
       } else {
-        return <span>无</span>
+        return <span>无可选值</span>
       }
     } else {
       return <Input />

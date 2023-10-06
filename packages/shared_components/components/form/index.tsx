@@ -78,7 +78,13 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
   const isEditing = (record: { key: any }) => record.key === editingKey
 
   const edit = (record: Partial<any> & { key: React.Key }) => {
-    form?.setFieldsValue({ type: '', placeholder: '', size: '', ...record })
+    form?.setFieldsValue({
+      type: '',
+      placeholder: '',
+      size: '',
+      option: '',
+      ...record
+    })
     setEditingKey(record.key)
   }
 
@@ -90,6 +96,7 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
       const index = newData.findIndex((item) => key === item.key)
       if (index > -1) {
         const item = newData[index]
+        item.option = row.operation
         newData.splice(index, 1, {
           ...item,
           ...row
@@ -150,21 +157,20 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
           </Button>
         </Form.Item>
         {data.map((item) => {
-          console.log('item666666666666', item)
-
           if (item.type === 'button')
             return (
               <Button key={item.key} type="primary" htmlType="submit">
                 按钮
               </Button>
             )
-          if (item.type === 'select')
+          if (item.type === 'select') {
+            const options = item?.option.split(',')
             return (
               <Select
                 key={item.key}
                 style={{ width: '100%' }}
-                defaultValue=""
-                options={item?.option.split(',').map((item, index) => {
+                defaultValue={options[0]}
+                options={options.map((item, index) => {
                   return {
                     label: item,
                     value: index.toString()
@@ -172,6 +178,7 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
                 })}
               />
             )
+          }
           if (item.type === 'input') return <Input key={item.key} />
         })}
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
