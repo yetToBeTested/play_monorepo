@@ -6,11 +6,13 @@ interface Item {
   name: string
   age: number
   address: string
+  initialValue: string
 }
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean
   dataIndex: string
+  initialValue: string
   title: any
   inputType: 'select' | 'number' | 'text'
   record: Item
@@ -24,22 +26,24 @@ const EditableCell: React.FC<EditableCellProps> = ({
   dataIndex,
   title,
   form,
+  initialValue,
   children,
   ...restProps
 }) => {
   const { Option } = Select
 
   const inputNode = () => {
+    console.log('initialValue', dataIndex, initialValue, form.getFieldValue())
     if (dataIndex === 'type') {
       return (
-        <Select defaultValue="input" style={{ width: 100 }}>
+        <Select style={{ width: 100 }} placeholder={initialValue}>
           <Option value="input">input</Option>
           <Option value="select">select</Option>
         </Select>
       )
     } else if (dataIndex === 'size') {
       return (
-        <Select defaultValue="small" style={{ width: 100 }}>
+        <Select style={{ width: 100 }} placeholder={initialValue}>
           <Option value="small">small</Option>
           <Option value="large">large</Option>
         </Select>
@@ -53,7 +57,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         return <span>无可选值</span>
       }
     } else {
-      return <Input />
+      return <Input placeholder={initialValue} />
     }
   }
 
@@ -109,8 +113,9 @@ const SharedContainerEditTable: React.FC<IProps> = ({
       ...col,
       onCell: (record: Item) => ({
         record,
-        dataIndex: col.dataIndex,
         title: col.title,
+        dataIndex: col.dataIndex,
+        initialValue: col.initialValue,
         form: form,
         editing: isEditing(record)
       })

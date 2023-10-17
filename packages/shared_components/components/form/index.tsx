@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react'
 import {
   Button,
+  Col,
   Form,
   Input,
   Modal,
   Popconfirm,
+  Row,
   Select,
   Typography
 } from 'antd'
@@ -17,33 +19,44 @@ interface Iprops {
 const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
   const [newItem, setNewItem] = useState(false)
   const [editingKey, setEditingKey] = useState<any>('')
-  const [data, setData] = useState(param)
-  const [form, setForm] = useState<any>()
-  const onCallback = (val) => setForm(val)
+  const [data, setData] = useState([...param])
+  const [tableForm, setTableForm] = useState<any>()
+  const onCallback = (val) => setTableForm(val)
 
   const columns: any = [
     {
       title: '控件名字',
       dataIndex: 'type',
-      width: '25%',
+      width: '15%',
+      initialValue: 'input',
+      editable: true
+    },
+    {
+      title: '初始值',
+      dataIndex: 'initialValue',
+      width: '15%',
+      initialValue: '我是初始值',
       editable: true
     },
     {
       title: '占位符',
       dataIndex: 'placeholder',
       width: '15%',
+      initialValue: '我是占位符',
       editable: true
     },
     {
       title: '大小',
       dataIndex: 'size',
       width: '20%',
+      initialValue: 'small',
       editable: true
     },
     {
       title: '可选值',
       dataIndex: 'option',
       width: '20%',
+      initialValue: '我是初始值, 我是初始值1, 我是初始值2,我是初始值',
       editable: true
     },
     {
@@ -78,25 +91,27 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
   const isEditing = (record: { key: any }) => record.key === editingKey
 
   const edit = (record: Partial<any> & { key: React.Key }) => {
-    form?.setFieldsValue({
+    tableForm?.setFieldsValue({
       type: '',
+      initialValue: '',
       placeholder: '',
       size: '',
       option: '',
       ...record
     })
+
     setEditingKey(record.key)
   }
 
   const save = async (key: React.Key) => {
     try {
-      const row = (await form?.validateFields()) as any
+      const row = (await tableForm?.validateFields()) as any
 
+      form.setFieldsValue({ [key]: row.initialValue })
       const newData = [...data]
       const index = newData.findIndex((item) => key === item.key)
       if (index > -1) {
         const item = newData[index]
-        item.option = row.operation
         newData.splice(index, 1, {
           ...item,
           ...row
@@ -126,62 +141,236 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
   const handleOk = () => {
     setNewItem(false)
   }
+  const Node = (type, props, options) => {
+    if (type === 'button')
+      return (
+        <Button
+          type="primary"
+          htmlType="submit"
+          onClick={() => {
+            console.log('ooB')
+          }}
+        >
+          按钮
+        </Button>
+      )
+    if (type === 'select') {
+      return (
+        <Select
+          onClick={() => {
+            console.log('ooS')
+          }}
+          style={{ width: '100%' }}
+          options={options.map((item, index) => {
+            return {
+              label: item,
+              value: index.toString()
+            }
+          })}
+          {...props}
+        />
+      )
+    }
+
+    if (type === 'input')
+      return (
+        <Input
+          onClick={() => {
+            console.log('oo')
+          }}
+          {...props}
+        />
+      )
+  }
+
+  const { Option } = Select
+  const [form] = Form.useForm()
+
   return (
     <>
       <Form
+        form={form}
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
+        labelCol={{ span: 2 }}
+        wrapperCol={{ span: 22 }}
         style={{ backgroundColor: '#fff', width: '100%', minHeight: 50 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        onClick={(e) => {
+          console.log(e.target, 55)
+
+          // const formItem = e.target.closest('.ant-form-item')
+
+          // if (formItem) {
+          //   setClickedElement(formItem)
+          // }
+        }}
       >
+        <Row gutter={[16, 16]}>
+          <Col span={6}>
+            <Form.Item
+              name="gender6"
+              label="Gender6"
+              rules={[{ required: true }]}
+              initialValue={'male'}
+            >
+              <Select
+                placeholder="Select a option and change input text above"
+                allowClear
+                onClick={() => {
+                  console.log('SelectF')
+                }}
+              >
+                <Option value="male">male</Option>
+                <Option value="female">female</Option>
+                <Option value="other">other</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+
+          <Col span={6}>
+            <Form.Item>
+              <Select
+                placeholder="Select a option and change input text above"
+                allowClear
+                onClick={() => {
+                  console.log('SelectF')
+                }}
+              >
+                <Option value="male">male</Option>
+                <Option value="female">female</Option>
+                <Option value="other">other</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item>
+              <Select
+                placeholder="Select a option and change input text above"
+                allowClear
+                onClick={() => {
+                  console.log('SelectF')
+                }}
+              >
+                <Option value="male">male</Option>
+                <Option value="female">female</Option>
+                <Option value="other">other</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item>
+              <Select
+                placeholder="Select a option and change input text above"
+                allowClear
+                onClick={() => {
+                  console.log('SelectF')
+                }}
+              >
+                <Option value="male">male</Option>
+                <Option value="female">female</Option>
+                <Option value="other">other</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item>
+              <Select
+                placeholder="Select a option and change input text above"
+                allowClear
+                onClick={() => {
+                  console.log('SelectF')
+                }}
+              >
+                <Option value="male">male</Option>
+                <Option value="female">female</Option>
+                <Option value="other">other</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Form.Item>
+            <Button>777666</Button>
+          </Form.Item>
+
+          <Form.Item>
+            <Button>777666</Button>
+          </Form.Item>
+        </Row>
+
         <Form.Item>
           <Button
             type="primary"
             onClick={() => {
               setData((data) => {
                 const newData = [...data]
-                newData.push({
-                  type: '请选择组件',
-                  key: data.length
-                })
+                if (
+                  !data.length ||
+                  data[data.length - 1].type != '请选择组件'
+                ) {
+                  newData.push({
+                    key: data.length,
+                    type: 'input',
+                    initialValue: '我是初始值',
+                    placeholder: '我是占位符',
+                    size: 'small',
+                    option: '我是初始值, 我是初始值1, 我是初始值2,我是初始值'
+                  })
+                }
+
                 return newData
               })
+
               setNewItem(true)
             }}
           >
             添加表单控件
           </Button>
         </Form.Item>
+        <Form.Item
+          name="gender"
+          label="Gender"
+          rules={[{ required: true }]}
+          initialValue={'male'}
+        >
+          <Select
+            placeholder="Select a option and change input text above"
+            allowClear
+            onClick={() => {
+              console.log('SelectF')
+            }}
+          >
+            <Option value="male">male</Option>
+            <Option value="female">female</Option>
+            <Option value="other">other</Option>
+          </Select>
+        </Form.Item>
+
         {data.map((item) => {
-          if (item.type === 'button')
+          const { type, key, option, initialValue, ...Props } = item
+
+          const options = option?.split(',')
+
+          if (type != '请选择组件') {
+            console.log('type', type, typeof type, type === 'select')
+
             return (
-              <Button key={item.key} type="primary" htmlType="submit">
-                按钮
-              </Button>
-            )
-          if (item.type === 'select') {
-            const options = item?.option.split(',')
-            return (
-              <Select
-                key={item.key}
-                style={{ width: '100%' }}
-                defaultValue={options[0]}
-                options={options.map((item, index) => {
-                  return {
-                    label: item,
-                    value: index.toString()
-                  }
-                })}
-              />
+              <Form.Item
+                label="66"
+                name={key}
+                key={key}
+                initialValue={initialValue}
+              >
+                {Node(type, Props, options)}
+              </Form.Item>
             )
           }
-          if (item.type === 'input') return <Input key={item.key} />
         })}
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

@@ -17,6 +17,7 @@ import { update } from '@/store/src/edit'
 import { SharedContainerTableStr } from '@motorepo/component'
 function LowCodeEdit() {
   const ref = useRef<any>(null)
+  // const tabFalg = useState(0)
 
   const updatedValue = useAppSelector((state) => state.edit.value)
   const dispatch = useAppDispatch()
@@ -88,6 +89,8 @@ function LowCodeEdit() {
         <button onClick={saveState}>保存</button>
         <button onClick={exportFile}>导出</button>
       </div>
+
+      <div></div>
       <div ref={ref}></div>
     </div>
   )

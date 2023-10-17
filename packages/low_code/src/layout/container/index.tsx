@@ -34,6 +34,8 @@ function Container() {
       accept: 'box',
 
       drop(item1: any) {
+        console.log('item1', item1)
+
         setItem((item) => [...item, item1])
         dispatch(update({ ...item1.props }))
       }
@@ -55,18 +57,36 @@ function Container() {
       {item.map((child, index) => {
         if (child.component == 'table') {
           return (
-            <SharedContainerTable
+            <div
               key={`${child.component}-${index}`}
-              dataSource={child.props.dataSource}
-              columns={child.props.columns}
-            />
+              onClick={() => {
+                console.log('child.component', child.props.dataSource)
+              }}
+            >
+              <SharedContainerTable
+                dataSource={child.props.dataSource}
+                columns={child.props.columns}
+              />
+            </div>
           )
         } else if (child.component == 'box') {
-          return <SharedBox key={`${child.component}-${index}`} />
+          return (
+            <div
+              onClick={() => {
+                console.log('child.component', child.component)
+              }}
+            >
+              <SharedBox key={`${child.component}-${index}`} />
+            </div>
+          )
         } else if (child.component == 'progress') {
           return <SharedProgressComponent key={`${child.component}-${index}`} />
         } else if (child.component == 'form') {
-          return <SharedForm key={`${child.component}-${index}`} data={[]} />
+          return (
+            <div key={`${child.component}-${index}`}>
+              <SharedForm data={[]}></SharedForm>
+            </div>
+          )
         }
       })}
     </div>
