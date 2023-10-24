@@ -26,6 +26,7 @@ function Container() {
   const updatedValue = useAppSelector((state) => state.edit.value)
 
   const [item, setItem] = useState<ItemType[]>([])
+
   const ref = useRef(null)
   const dispatch = useAppDispatch()
 
@@ -34,8 +35,6 @@ function Container() {
       accept: 'box',
 
       drop(item1: any) {
-        console.log('item1', item1)
-
         setItem((item) => [...item, item1])
         dispatch(update({ ...item1.props }))
       }
@@ -49,7 +48,6 @@ function Container() {
         item[0].props = updatedValue
         return [...item]
       })
-    console.log('item', item)
   }, [updatedValue])
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Form, Input, Select, Space, Table, Tag } from 'antd'
 
 interface Item {
@@ -18,6 +18,8 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   record: Item
   index: number
   form: any
+  selectedOption: any
+  setSelectedOption: any
   children: React.ReactNode
 }
 
@@ -28,18 +30,41 @@ const EditableCell: React.FC<EditableCellProps> = ({
   form,
   initialValue,
   children,
+  selectedOption,
+  setSelectedOption,
   ...restProps
 }) => {
   const { Option } = Select
 
+  const handleSelectChange = (value) => {
+    // 根据选择的值来决定要显示在 Input 组件中的内容
+
+    if (value === 'input') {
+      console.log('value', value)
+      setSelectedOption({ ...selectedOption, type: value })
+    } else if (value === 'select') {
+      setSelectedOption({
+        ...selectedOption,
+        type: value
+      })
+    } else {
+      setSelectedOption({ type: 'select' })
+    }
+  }
+
   const inputNode = () => {
-    console.log('initialValue', dataIndex, initialValue, form.getFieldValue())
     if (dataIndex === 'type') {
       return (
-        <Select style={{ width: 100 }} placeholder={initialValue}>
-          <Option value="input">input</Option>
-          <Option value="select">select</Option>
-        </Select>
+        <>
+          <Select
+            style={{ width: 100 }}
+            placeholder={initialValue}
+            onChange={handleSelectChange}
+          >
+            <Option value="input">input</Option>
+            <Option value="select">select</Option>
+          </Select>
+        </>
       )
     } else if (dataIndex === 'size') {
       return (
@@ -49,13 +74,18 @@ const EditableCell: React.FC<EditableCellProps> = ({
         </Select>
       )
     } else if (dataIndex === 'option') {
-      const type = form.getFieldValue().type
+      // const type = form.getFieldValue().type
 
-      if (type === 'select') {
-        return <Input placeholder="请输入：data1,data2,data3..." />
-      } else {
-        return <span>无可选值</span>
-      }
+      // return <Input value={selectedOption} />
+      // console.log('selectedOption', selectedOption)
+      console.log(selectedOption)
+
+      return (
+        <Input
+          disabled={selectedOption.type !== 'select'}
+          placeholder="请输入：data1,data2,data3..."
+        />
+      )
     } else {
       return <Input placeholder={initialValue} />
     }
@@ -100,7 +130,7 @@ const SharedContainerEditTable: React.FC<IProps> = ({
   onCallback
 }) => {
   const [form] = Form.useForm()
-
+  const [selectedOption, setSelectedOption] = useState({ type: '' })
   useEffect(() => {
     onCallback(form)
   }, [form])
@@ -117,7 +147,9 @@ const SharedContainerEditTable: React.FC<IProps> = ({
         dataIndex: col.dataIndex,
         initialValue: col.initialValue,
         form: form,
-        editing: isEditing(record)
+        editing: isEditing(record),
+        selectedOption,
+        setSelectedOption
       })
     }
   })

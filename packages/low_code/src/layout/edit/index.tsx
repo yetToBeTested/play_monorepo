@@ -7,7 +7,9 @@ import { basicSetup } from 'codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { json } from '@codemirror/lang-json'
 
-import { message } from 'antd'
+import { message, Tabs } from 'antd'
+
+import type { TabsProps } from 'antd'
 
 import { isCodemirrorJSON } from '@/utils'
 
@@ -83,8 +85,27 @@ function LowCodeEdit() {
     }
   }, [strData])
 
+  const onChange = (key: string) => {
+    console.log(key)
+  }
+
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: '属性',
+      children: 'Content of Tab Pane 1'
+    },
+    {
+      key: '2',
+      label: '数据',
+      children: 'Content of Tab Pane 2'
+    }
+  ]
+
   return (
     <div>
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+
       <div>
         <button onClick={saveState}>保存</button>
         <button onClick={exportFile}>导出</button>

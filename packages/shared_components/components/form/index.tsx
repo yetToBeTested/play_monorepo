@@ -198,110 +198,7 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        onClick={(e) => {
-          console.log(e.target, 55)
-
-          // const formItem = e.target.closest('.ant-form-item')
-
-          // if (formItem) {
-          //   setClickedElement(formItem)
-          // }
-        }}
       >
-        <Row gutter={[16, 16]}>
-          <Col span={6}>
-            <Form.Item
-              name="gender6"
-              label="Gender6"
-              rules={[{ required: true }]}
-              initialValue={'male'}
-            >
-              <Select
-                placeholder="Select a option and change input text above"
-                allowClear
-                onClick={() => {
-                  console.log('SelectF')
-                }}
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-
-          <Col span={6}>
-            <Form.Item>
-              <Select
-                placeholder="Select a option and change input text above"
-                allowClear
-                onClick={() => {
-                  console.log('SelectF')
-                }}
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={6}>
-            <Form.Item>
-              <Select
-                placeholder="Select a option and change input text above"
-                allowClear
-                onClick={() => {
-                  console.log('SelectF')
-                }}
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={6}>
-            <Form.Item>
-              <Select
-                placeholder="Select a option and change input text above"
-                allowClear
-                onClick={() => {
-                  console.log('SelectF')
-                }}
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={6}>
-            <Form.Item>
-              <Select
-                placeholder="Select a option and change input text above"
-                allowClear
-                onClick={() => {
-                  console.log('SelectF')
-                }}
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row>
-          <Form.Item>
-            <Button>777666</Button>
-          </Form.Item>
-
-          <Form.Item>
-            <Button>777666</Button>
-          </Form.Item>
-        </Row>
-
         <Form.Item>
           <Button
             type="primary"
@@ -312,16 +209,16 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
                   !data.length ||
                   data[data.length - 1].type != '请选择组件'
                 ) {
-                  newData.push({
+                  const obj = {
                     key: data.length,
                     type: 'input',
                     initialValue: '我是初始值',
                     placeholder: '我是占位符',
                     size: 'small',
-                    option: '我是初始值, 我是初始值1, 我是初始值2,我是初始值'
-                  })
+                    option: '我是可选值1, 我是可选值2,我是可选值3'
+                  }
+                  newData.push(obj)
                 }
-
                 return newData
               })
 
@@ -330,24 +227,20 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
           >
             添加表单控件
           </Button>
-        </Form.Item>
-        <Form.Item
-          name="gender"
-          label="Gender"
-          rules={[{ required: true }]}
-          initialValue={'male'}
-        >
-          <Select
-            placeholder="Select a option and change input text above"
-            allowClear
+          <Button
+            type="primary"
             onClick={() => {
-              console.log('SelectF')
+              setData((data) => {
+                const newData = [...data]
+
+                return newData
+              })
+
+              setNewItem(true)
             }}
           >
-            <Option value="male">male</Option>
-            <Option value="female">female</Option>
-            <Option value="other">other</Option>
-          </Select>
+            编辑表单控件
+          </Button>
         </Form.Item>
 
         {data.map((item) => {
@@ -356,8 +249,6 @@ const SharedForm: FC<Iprops> = ({ data: param = [] }) => {
           const options = option?.split(',')
 
           if (type != '请选择组件') {
-            console.log('type', type, typeof type, type === 'select')
-
             return (
               <Form.Item
                 label="66"
